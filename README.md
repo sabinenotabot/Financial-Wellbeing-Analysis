@@ -19,7 +19,11 @@ The financial products under consideration are:
 * Student loan
 
 ### Results and Insight
-[TO FILLL IN !]
+* Financial products do not explain much of the variation in financial wellbeing 
+* Retirement and investment accounts had the greatest (positive) effect on financial wellbeing. 
+* Student loans, which had a negative effect, followed close behind
+* The impact of all products was reduced once income, employment status, education and health status was accounte for 
+
 
 ## Code and Resources Used 
 **Python Version:** 3.7
@@ -50,9 +54,31 @@ To gain an initial understanding of the data, I created several visualizations. 
 
 [INSERT IMAGES] 
 
-In addition, I transformed the categorical variables into dummy variables to create pivot tables that for each product showed the mean and medians associated with owning and not owning the product. I added a third row that calculates the difference between the median and the mean for each product, to see which products create the greatest differences. 
+In addition, I transformed the categorical variables into dummy variables to create pivot tables that for each product showed the mean and medians associated with owning and not owning the product. I added a third row that calculates the difference between the median and the mean for each product, to see which products create the greatest differences. I used the following code to create pivot tables:
 
-[INSERT TABLES]
+
+    for i in df_products.columns:
+    table = pd.pivot_table(df, values=['financial_wellbeing'], index=[i],
+                   aggfunc=[np.mean,np.median])
+    table.loc['difference'] = np.abs(table.loc[0].sub(table.loc[1], fill_value=0))
+    print(table)
+    print()
+
+
+
+| Retirement Account | Mean | Median |
+| --------------- | --------------- | --------------- |
+| Yes | 60.1 | 50 |
+| No | 50.4 | 60 |
+| Difference | 9.7 | 10 |
+
+
+| Investment Account | Mean | Median |
+| --------------- | --------------- | --------------- |
+| Yes | 63.7 | 63 |
+| No | 52.4 | 52 |
+| Difference | 11.2 | 11 |
+
 
 Retirement accounts were associated with the greatest difference in means, while investment accounts saw the greatest difference in medians. 
 
@@ -62,12 +88,72 @@ I proceeded in two steps:
 1. Run univariate regressions of each product on the financial wellbeing score
 2. For the models with the best fit, add different collections of control variables and run multivariate regressions
 
-For step 1, I added visualizations of each regression and created a table with the R-squared value of each model to easily compare fit across models. The models with highest R-squared values were the models that included the retirement account, pension, investment account and health insurance. These products also saw some of the strongest correlations with financial wellbeing. 
+For step 1, I added visualizations of each regression and created a table with the R-squared value of each model to easily compare fit across models. 
+
+  
+    for i in df_products.columns:
+       
+      X = df_products[i] 
+      y = df['financial_wellbeing']
+      X = sm.add_constant(X)
+      est = sm.OLS(y, X).fit()
+
+      print(est.summary())
+
+
+
+The models with highest R-squared values were the models that included the retirement account, pension, investment account and health insurance. These products also saw some of the strongest correlations with financial wellbeing. 
 
 [Add visualizations & table]
 
 
+| Product | Coefficient | R Squared | p-value |
+| --------------- | --------------- | --------------- | ---- |
+| Savings Account | 8.6 | 0.046 | 0.00 |
+| Life Insurance | 4.8 | 0.030 | 0.00 |
+| Health Insurance | 6.9 | 0.048 | 0.00 |
+| Retirement Account | 9.8 | 0.118 | 0.00 |
+| Pension | 9.0 | 0.092 | 0.00 |
+| Investment Account | 11.1 | 0.136 | 0.00 | 
+| Education Savings Account | 5.22 | 0.008 | 0.00 |
+| Student Loan | -6.1 | 0.023 | 0.00 |
+
+For the second step, I first added each control variable individually to see how they changed the effect of the impact of the products on financial wellbeing. 
+
+| Product | Coefficient | R Squared | p-value |
+| --------------- | --------------- | --------------- | ---- |
+| Income | 0.0(0008) | 0.131 | 0.00 |
+| Education | 4.8 | 0.071 | 0.00 |
+| Health | 4.5 | 0.244| 0.00 |
+| Financial Skill | 0.6 | 0.244 | 0.00 |
+| Employent | 9.0 | 0.092 | 0.00 |
+| Investment Account | 11.1 | 0.136 | 0.00 | 
+| Education Savings Account | 5.22 | 0.008 | 0.00 |
+| Student Loan | -6.1 | 0.023 | 0.00 |
+
+Finally, I added all control variables to study the impact of each product on financial wellbeing. 
+
+| Product | Coefficient | Adjusted R Squared | p-value |
+| --------------- | --------------- | --------------- | ---- |
+| Savings Account | 3.4 | 0.427 | 0.00 |
+| Life Insurance | 1.3 | 0.422| 0.00 |
+| Health Insurance | 2.0 | 0.423 | 0.00 |
+| Retirement Account | 4.4 | 0.438 | 0.00 |
+| Pension | 3.2 | 0.49 | 0.00 |
+| Investment Account | 4.3 | 0.435 | 0.00 | 
+| Education Savings Account | -0.2 | 0.419 | 0.70 |
+| Student Loan | -4.1 | 0.430 | 0.00 |
 
 
+## Discussion and Looking Forward 
 
+Financial products do not explain much of the variation in financial wellbeing 
+Retirement and investment accounts had the greatest (positive) effect on financial wellbeing. 
+Student loans, which had a negative effect, followed close behind
+The impact of all products was reduced once income, employment status, education and health status was accounte for 
+
+* Did not check for interaction effects: Impact might be different depending on characteristics
+* Multi-colinearity (could check with VIF test)
+  * Not a problem if it is just between the control vartiables 
+  * Problem if it is between our variables of interest and control variables 
 
