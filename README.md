@@ -150,9 +150,10 @@ For each dummy variable representing a type of employment or education level, p 
 
 These results indicate that the control variables individually explain some, but not a lot, of variation in financial wellbeing scores. Health and financial skill perform the best in this regard. In addition, for all control variables, the effects on financial wellbeing are significant. 
 
-While significance or strong explanatory power t required to motivate inclduing 
+While significance or strong explanatory power are not required for control variables to be included (we are interested in their effects when our variables of interest are taken into account, after all), these results indicate that our control variables might help improve the explanatory power of the model regressing financial wellbeing on product types. 
 
-Finally, I added all control variables to study the impact of each product on financial wellbeing. 
+Finally, I run a multivariate regression of financial wellbeing on each product type plus the explanatory variables: 
+
 
 | Product | Coefficient | Adjusted R Squared | p-value |
 | --------------- | --------------- | --------------- | ---- |
@@ -165,13 +166,19 @@ Finally, I added all control variables to study the impact of each product on fi
 | Education Savings Account | -0.2 | 0.419 | 0.70 |
 | Student Loan | -4.1 | 0.430 | 0.00 |
 
+There are several interesting changes that occur when control variables are added:
+* The coefficients for all product types decreases
+* The explanatory power (R squared) of the models improves (more than 40% of the variance can know be explained by most models)
+* In our new models, student loans have a greater effect on financial wellbeing than pensions, savings accounts and health insurance
+* The effect of ownership of each product type remains significant, except for education savings accounts (again, this could be due to unbalanced data).
+
 
 ## Discussion and Looking Forward 
 
-The results of the regression show that financial products do not explain much of the variation in financial wellbeing. However, the effect on financial wellbeing was found to be significant, even after controlling for confounding characteristics. Retirement and investment accounts had the greatest (positive) effect on financial wellbeing. Student loans, which had a negative effect, followed close behind The impact of all products was reduced once income, employment status, education and health status was accounte for 
+This straightforward regression analysis does by no means complete the examination of the effect of financial products on financial wellbeing. There are several ways in which the modelling might be improved to allow for more accurate results and a correct characterization of causal influence. Some of these include:
 
-There are several ways in which the modelling might be improved:
-* **Adding Interaction Terms**: I did not check for interaction effects between products and control variables. If it is the case that the impact of product ownership on financial wellbeing varies for different levels of the control variables, introducing interaction terms would improve the moel. 
-* **Accounting for Multi-colinearity**: I did not check for multi-colinearity (with, for example, a VIF test). There is chance that multi-colinearity is distorting are results as it might be the case that multi-colinearity occurs between some of the product variables and the control variables (e.g. income might be correlated with whether one has an investment account). While there might also be multi-colinearity between the control variables, this is less of a concern, as it does not affect the values we are interested in. 
+* **Adding additional control variables:** Financial wellbeing is a multi-dimensional concept that is likely influenced by many factors. Therefore, to be confident of the causal effect of different product types on financial wellbeing, more control variables would likely have to be added to account for confounding factors that our small set of control variables does not measure.
+* **Adding Interaction Terms:** I did not check for interaction effects between products and control variables. If it is the case that the impact of product ownership on financial wellbeing varies for different levels of the control variables, introducing interaction terms would improve the moel. 
+* **Accounting for Multi-colinearity:** I did not check for multi-colinearity (with, for example, a VIF test). There is chance that multi-colinearity is distorting are results as it might be the case that multi-colinearity occurs between some of the product variables and the control variables (e.g. income might be correlated with whether one has an investment account). While there might also be multi-colinearity between the control variables, this is less of a concern, as it does not affect the values we are interested in. 
 
 
