@@ -118,6 +118,12 @@ The models with highest R-squared values were the models that included the retir
 | Education Savings Account | 5.22 | 0.008 | 0.00 |
 | Student Loan | -6.1 | 0.023 | 0.00 |
 
+* Not major explanatory power
+* Education Savings Account might be low due to unbalanced data, very few respondents had this account 
+
+
+
+
 For the second step, I first added each control variable individually to see how they changed the effect of the impact of the products on financial wellbeing. 
 
 | Product | Coefficient | R Squared | p-value |
