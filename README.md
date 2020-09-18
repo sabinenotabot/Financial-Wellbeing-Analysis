@@ -52,7 +52,9 @@ After retrieving the CFPB survey data, I cleaned the data to improve the accurac
 ## Exploratory Analysis 
 To gain an initial understanding of the data, I created several visualizations. For the numerical data, I created histograms to understand their distribution. For the  and bar charts for the categorical data to understand the balance of classes. 
 
-[INSERT IMAGES] 
+ ![Histogram of Financial Skill Scores](https://github.com/sabinenotabot/Financial-Wellbeing-Analysis/blob/master/financial_skill%20plot.png)
+ 
+ ![Barchart of educational status](https://github.com/sabinenotabot/Financial-Wellbeing-Analysis/blob/master/education%20plot.png)
 
 In addition, I transformed the categorical variables into dummy variables to create pivot tables that for each product showed the mean and medians associated with owning and not owning the product. I added a third row that calculates the difference between the median and the mean for each product, to see which products create the greatest differences. I used the following code to create pivot tables:
 
@@ -102,9 +104,11 @@ For step 1, I added visualizations of each regression and created a table with t
 
 
 
+
+![Boxplot of regression of pension on financial wellbeing](https://github.com/sabinenotabot/Financial-Wellbeing-Analysis/blob/master/pension%20boxplot.png)
+
 The models with highest R-squared values were the models that included the retirement account, pension, investment account and health insurance. These products also saw some of the strongest correlations with financial wellbeing. 
 
-[Add visualizations & table]
 
 
 | Product | Coefficient | R Squared | p-value |
