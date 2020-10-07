@@ -1,6 +1,6 @@
 # Financial Wellbeing Analysis (Python)
 
-*Skills: Data Cleaning, Visualization, Pivot Tables, Linear Regression* 
+*Skills: Data Cleaning, Visualization, Pivot Tables, Regression* 
 
 ## Project Overview 
 
